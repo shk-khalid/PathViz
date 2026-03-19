@@ -38,13 +38,16 @@ export default function ControlPanel({
 }: ControlPanelProps) {
   return (
     <div className="w-[360px] h-screen bg-gray-950/80 backdrop-blur-xl border-r border-white/10 p-6 overflow-hidden flex flex-col gap-6 shadow-2xl">
-      <div className="space-y-1">
-        <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 tracking-tight">
-          PathViz
-        </h1>
-        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-          Algorithm Visualizer
-        </p>
+      <div className="flex items-center gap-3">
+        <img src="/favicon.svg" alt="PathViz Logo" className="w-10 h-10 rounded-xl shadow-lg shadow-blue-500/20" />
+        <div className="space-y-0.5">
+          <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 tracking-tight leading-none">
+            PathViz
+          </h1>
+          <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] leading-none">
+            Visualizer
+          </p>
+        </div>
       </div>
 
       <div className="space-y-6">
