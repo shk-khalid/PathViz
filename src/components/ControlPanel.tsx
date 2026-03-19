@@ -37,18 +37,22 @@ export default function ControlPanel({
   isVisualizing
 }: ControlPanelProps) {
   return (
-    <div className="w-[360px] h-screen bg-gray-900 border-r border-gray-800 p-6 overflow-y-auto flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white mb-2">Pathfinding Visualizer</h1>
-        <p className="text-sm text-gray-400">Visualize algorithms in action</p>
+    <div className="w-[360px] h-screen bg-gray-950/80 backdrop-blur-xl border-r border-white/10 p-6 overflow-hidden flex flex-col gap-6 shadow-2xl">
+      <div className="space-y-1">
+        <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 tracking-tight">
+          PathViz
+        </h1>
+        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+          Algorithm Visualizer
+        </p>
       </div>
 
       <div className="space-y-6">
         {/* Algorithm Selection */}
-        <div className="space-y-2">
-          <Label className="text-white text-sm font-medium">Algorithm</Label>
+        <div className="space-y-1.5">
+          <Label className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Algorithm</Label>
           <Select value={algorithm} onValueChange={(value) => onAlgorithmChange(value as AlgorithmType)}>
-            <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+            <SelectTrigger className="bg-white/5 border-white/10 text-white focus:ring-blue-500 hover:bg-white/10 hover:text-white transition-colors h-10 px-4">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-gray-800 border-gray-700">
@@ -61,10 +65,10 @@ export default function ControlPanel({
         </div>
 
         {/* Grid Size */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <Label className="text-white text-sm font-medium">Grid Size</Label>
-            <span className="text-sm text-gray-400">{gridSize}x{gridSize}</span>
+            <Label className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Grid Size</Label>
+            <span className="text-[10px] font-bold text-blue-400 tracking-wider font-mono">{gridSize}x{gridSize}</span>
           </div>
           <Slider
             value={[gridSize]}
@@ -72,16 +76,17 @@ export default function ControlPanel({
             min={10}
             max={50}
             step={5}
-            className="w-full"
+            showTicks={true}
+            className="w-full h-4"
             disabled={isVisualizing}
           />
         </div>
 
         {/* Animation Speed */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <Label className="text-white text-sm font-medium">Animation Speed</Label>
-            <span className="text-sm text-gray-400">{speed}ms</span>
+            <Label className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Animation Speed</Label>
+            <span className="text-[10px] font-bold text-blue-400 tracking-wider font-mono">{speed}ms</span>
           </div>
           <Slider
             value={[speed]}
@@ -89,7 +94,7 @@ export default function ControlPanel({
             min={1}
             max={100}
             step={1}
-            className="w-full"
+            className="w-full h-4"
           />
         </div>
 
@@ -98,8 +103,8 @@ export default function ControlPanel({
           <Label className="text-white text-sm font-medium">Draw Mode</Label>
           <div className="grid grid-cols-2 gap-2">
             <Button
-              variant={drawMode === 'wall' ? 'default' : 'outline'}
-              className={`${drawMode === 'wall' ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-800 hover:bg-gray-700'} border-gray-700 text-white`}
+              variant="ghost"
+              className={`h-11 border border-white/10 transition-all ${drawMode === 'wall' ? 'bg-blue-600 text-white hover:bg-blue-500 hover:text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'}`}
               onClick={() => onDrawModeChange(drawMode === 'wall' ? null : 'wall')}
               disabled={isVisualizing}
             >
@@ -107,8 +112,8 @@ export default function ControlPanel({
               Wall
             </Button>
             <Button
-              variant={drawMode === 'start' ? 'default' : 'outline'}
-              className={`${drawMode === 'start' ? 'bg-green-600 hover:bg-green-500' : 'bg-gray-800 hover:bg-gray-700'} border-gray-700 text-white`}
+              variant="ghost"
+              className={`h-11 border border-white/10 transition-all ${drawMode === 'start' ? 'bg-emerald-600 text-white hover:bg-emerald-500 hover:text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'}`}
               onClick={() => onDrawModeChange(drawMode === 'start' ? null : 'start')}
               disabled={isVisualizing}
             >
@@ -116,8 +121,8 @@ export default function ControlPanel({
               Start
             </Button>
             <Button
-              variant={drawMode === 'end' ? 'default' : 'outline'}
-              className={`${drawMode === 'end' ? 'bg-red-600 hover:bg-red-500' : 'bg-gray-800 hover:bg-gray-700'} border-gray-700 text-white`}
+              variant="ghost"
+              className={`h-11 border border-white/10 transition-all ${drawMode === 'end' ? 'bg-rose-600 text-white hover:bg-rose-500 hover:text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'}`}
               onClick={() => onDrawModeChange(drawMode === 'end' ? null : 'end')}
               disabled={isVisualizing}
             >
@@ -125,8 +130,8 @@ export default function ControlPanel({
               End
             </Button>
             <Button
-              variant="outline"
-              className="bg-gray-800 hover:bg-gray-700 border-gray-700 text-white"
+              variant="ghost"
+              className="h-11 bg-white/5 border border-white/10 text-gray-400 hover:bg-white/10 hover:text-white transition-all"
               onClick={onGenerateMaze}
               disabled={isVisualizing}
             >
@@ -139,7 +144,7 @@ export default function ControlPanel({
         {/* Action Buttons */}
         <div className="space-y-2">
           <Button
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white"
+            className="w-full h-11 bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 active:scale-[0.98] transition-all border-0"
             onClick={onVisualize}
             disabled={isVisualizing}
           >
@@ -151,13 +156,13 @@ export default function ControlPanel({
             ) : (
               <>
                 <Play className="w-4 h-4 mr-2" />
-                Start Visualization
+                Proceed
               </>
             )}
           </Button>
           <Button
-            variant="outline"
-            className="w-full bg-gray-800 hover:bg-gray-700 border-gray-700 text-white"
+            variant="ghost"
+            className="w-full h-11 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-400 hover:text-white active:scale-[0.98] transition-all"
             onClick={onClearPath}
             disabled={isVisualizing}
           >
@@ -165,40 +170,35 @@ export default function ControlPanel({
             Clear Path
           </Button>
           <Button
-            variant="outline"
-            className="w-full bg-gray-800 hover:bg-gray-700 border-gray-700 text-white"
+            variant="ghost"
+            className="w-full h-11 bg-white/5 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/30 text-gray-400 hover:text-rose-500 active:scale-[0.98] transition-all group"
             onClick={onClearBoard}
             disabled={isVisualizing}
           >
-            <Trash2 className="w-4 h-4 mr-2" />
+            <Trash2 className="w-4 h-4 mr-2 transition-colors" />
             Clear Board
           </Button>
         </div>
 
         {/* Legend */}
-        <div className="space-y-2 pt-4 border-t border-gray-800">
-          <Label className="text-white text-sm font-medium">Legend</Label>
-          <div className="space-y-2 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-green-500 rounded"></div>
-              <span className="text-gray-300">Start Point</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-red-500 rounded"></div>
-              <span className="text-gray-300">End Point</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-gray-800 rounded"></div>
-              <span className="text-gray-300">Wall</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-blue-300 rounded"></div>
-              <span className="text-gray-300">Visited Cell</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-yellow-400 rounded"></div>
-              <span className="text-gray-300">Final Path</span>
-            </div>
+        <div className="space-y-3 pt-5 border-t border-white/5">
+          <Label className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Legend</Label>
+          <div className="grid grid-cols-2 gap-1.5">
+            {[
+              { label: 'Start', color: 'bg-emerald-500', shadow: 'shadow-emerald-500/40' },
+              { label: 'End', color: 'bg-rose-500', shadow: 'shadow-rose-500/40' },
+              { label: 'Wall', color: 'bg-blue-600', shadow: 'shadow-blue-600/40' },
+              { label: 'Visited', color: 'bg-blue-300', shadow: 'shadow-blue-300/40' },
+              { label: 'Path', color: 'bg-yellow-400', shadow: 'shadow-yellow-400/40' },
+            ].map((item, index) => (
+              <div 
+                key={item.label}
+                className={`flex items-center gap-2 px-2 py-1.5 rounded-md bg-white/[0.03] border border-white/[0.05] hover:bg-white/[0.08] transition-all group ${index === 4 ? 'col-span-2' : ''}`}
+              >
+                <div className={`w-1.5 h-1.5 rounded-full ${item.color} shadow-[0_0_6px] ${item.shadow}`}></div>
+                <span className="text-[10px] font-bold text-gray-500 group-hover:text-gray-300 uppercase tracking-widest leading-none transition-colors">{item.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

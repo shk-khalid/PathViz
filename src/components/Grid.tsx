@@ -55,8 +55,8 @@ export default function Grid({
 }: GridProps) {
   const [isDrawing, setIsDrawing] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
-
-  const cellSize = Math.min(Math.floor(800 / gridSize), 40);
+  const GRID_SIZE = 700;
+  const cellSize = GRID_SIZE / gridSize;
 
   const handleMouseDown = useCallback((row: number, col: number) => {
     setIsDrawing(true);
@@ -98,8 +98,10 @@ export default function Grid({
       ref={gridRef}
       className="inline-grid gap-0 select-none bg-gray-950 p-4 rounded-lg"
       style={{
-        gridTemplateColumns: `repeat(${gridSize}, ${cellSize}px)`,
-        gridTemplateRows: `repeat(${gridSize}, ${cellSize}px)`
+        width: `${GRID_SIZE}px`,
+        height: `${GRID_SIZE}px`,
+        gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+        gridTemplateRows: `repeat(${gridSize}, 1fr)`
       }}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
